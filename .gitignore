@@ -1,0 +1,13 @@
+
+/.vs
+/.vscode
+/bin
+/obj
+/wwwroot
+/temp
+
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+*.sln
