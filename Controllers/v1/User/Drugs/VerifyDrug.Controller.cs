@@ -17,8 +17,13 @@ public partial class DrugsController : ControllerBase
       var drug = await mDbContext.Drugs.Where(e => e.Code == body.Code).FirstOrDefaultAsync();
       if (drug == null)
       {
-        return BadRequest(new { Status = 400, Message = "Invalid drug" });
+        return BadRequest(new { Status = 400, Message = "The Drug is Fake or You scanned an Invalid QR Code." });
       }
+
+      drug.IsScanned = true;
+      drug.NoOfScans++;
+
+      await mDbContext.SaveChangesAsync();
 
       return Ok(new { Status = 200, Message = "Ok", Data = GetDrug(drug) });
     }
@@ -48,8 +53,10 @@ public partial class DrugsController : ControllerBase
     public string? Name { get; set; }
     public string? Code { get; set; }
     public string? BatchNo { get; set; }
+    public bool IsScanned { get; set; }
+    public int NoOfScans { get; set; }
     public DateTime? ExpirationDate { get; set; }
-    public DateTime? ManufacturedBy { get; set; }
+    public string? ManufacturedBy { get; set; }
     public DateTime? ManufacturingDate { get; set; }
     public DateTime DateModified { get; set; }
     public DateTime DateCreated { get; set; }

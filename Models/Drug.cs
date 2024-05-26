@@ -34,6 +34,10 @@ public class Drug
   [StringLength(1024)]
   public string? BatchNo { get; set; }
 
+  public bool IsScanned { get; set; }
+
+  public int NoOfScans { get; set; }
+
   public DateTime DateModified { get; set; }
 
   public DateTime DateCreated { get; set; }
@@ -51,6 +55,7 @@ public class DrugConfiguration : IEntityTypeConfiguration<Drug>
   {
     builder.HasQueryFilter(e => e.DateDeleted == null);
 
+    builder.Property(e => e.NoOfScans).HasDefaultValue(0);
     builder.Property(e => e.DateCreated).HasDefaultValueSql("(GETUTCDATE())");
     builder.Property(e => e.DateModified).HasDefaultValueSql("(GETUTCDATE())");
   }

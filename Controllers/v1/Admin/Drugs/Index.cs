@@ -6,17 +6,7 @@ namespace DrugScanner.Server.Controllers.v1.Admin;
 
 [Route("api/v1/admin/drugs")]
 [ApiController]
-public partial class DrugsController : ControllerBase
+public partial class DrugsController(
+  ApplicationDbContext dbContext, IDrugsService drugsService) : ControllerBase
 {
-
-  private readonly ApplicationDbContext mDbContext;
-  private readonly IDrugsService mDrugsService;
-
-  public DrugsController(
-    ApplicationDbContext dbContext, IDrugsService drugsService)
-  {
-    mDrugsService = drugsService;
-    mDbContext = dbContext;
-  }
-
 }

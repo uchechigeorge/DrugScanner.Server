@@ -17,7 +17,7 @@ public partial class DrugsController : ControllerBase
       parameters.Page ??= 1;
       parameters.PageSize ??= 50;
 
-      var result = await mDrugsService.GetDrugs(parameters);
+      var result = await drugsService.GetDrugs(parameters);
 
       var data = result.Data
       ?.Select(GetDrug)
@@ -46,7 +46,7 @@ public partial class DrugsController : ControllerBase
   {
     try
     {
-      var result = await mDrugsService.GetDrugs(new GetDrugParams { Id = id });
+      var result = await drugsService.GetDrugs(new GetDrugParams { Id = id });
 
       if (!result.Data.Any())
       {
@@ -85,8 +85,10 @@ public partial class DrugsController : ControllerBase
     public string? Name { get; set; }
     public string? Code { get; set; }
     public string? BatchNo { get; set; }
+    public bool IsScanned { get; set; }
+    public int NoOfScans { get; set; }
     public DateTime? ExpirationDate { get; set; }
-    public DateTime? ManufacturedBy { get; set; }
+    public string? ManufacturedBy { get; set; }
     public DateTime? ManufacturingDate { get; set; }
     public DateTime DateModified { get; set; }
     public DateTime DateCreated { get; set; }

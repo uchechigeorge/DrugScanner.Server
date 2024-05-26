@@ -13,7 +13,7 @@ public partial class DrugsController : ControllerBase
   {
     try
     {
-      var codeExists = await mDbContext.Drugs.Where(e => e.Code == body.Code).AnyAsync();
+      var codeExists = await dbContext.Drugs.Where(e => e.Code == body.Code).AnyAsync();
       if (codeExists)
       {
         return BadRequest(new { Status = 400, Message = "Duplicate codes" });
@@ -29,8 +29,8 @@ public partial class DrugsController : ControllerBase
         ManufacturingDate = body.ManufacturingDate,
         StatusId = body.StatusId,
       };
-      await mDbContext.Drugs.AddAsync(drug);
-      await mDbContext.SaveChangesAsync();
+      await dbContext.Drugs.AddAsync(drug);
+      await dbContext.SaveChangesAsync();
 
       return CreatedAtAction(nameof(GetOne), new { drug.Id }, new { Status = 201, Message = "Created", Data = GetDrug(drug) });
     }

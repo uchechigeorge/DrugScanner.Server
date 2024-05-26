@@ -42,7 +42,6 @@ public partial class NewsFeedsController : ControllerBase
     public string? Title { get; set; }
     [Required]
     public string? Description { get; set; }
-    public string? Address { get; set; }
     public IFormFile? Image { get; set; }
   }
 
